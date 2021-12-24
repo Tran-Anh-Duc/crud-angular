@@ -43,21 +43,26 @@ export class ProductService {
     this.products.push(product);
   }
 
-  findById(id: any) {
-    return this.products.find(product => product.id === id);
+  findById(id?:0) {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id == id) {
+        return this.products[i];
+      }
+    }
+    return null;
   }
 
-  updateProduct(id: any, product: Product) {
+  updateProduct(id: number, product: Product) {
     for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
+      if (this.products[i].id == id) {
         this.products[i] = product;
       }
     }
   }
 
   deleteProduct(id: any) {
-    this.products = this.products.filter(product => {
-      return product.id !== id;
+    this.products = this.products.filter((product: { id: number; }) => {
+      return product.id != id;
     });
   }
 }
